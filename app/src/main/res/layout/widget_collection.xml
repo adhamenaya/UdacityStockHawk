@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/widget_title"
+            android:contentDescription="@string/widget_title"
             android:textSize="@dimen/md_title_textsize"
             android:layout_gravity="center"/>
     </FrameLayout>
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
+            android:contentDescription="@string/stock_list"
             android:dividerHeight="0dp"
             tools:listitem="@layout/widget_collection_item"/>
     </FrameLayout>

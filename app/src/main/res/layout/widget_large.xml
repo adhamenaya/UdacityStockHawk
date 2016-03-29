@@ -15,6 +15,9 @@
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         tools:text="GOOG"
+        android:contentDescription="@string/stock_symbol"
+        android:focusable="true"
+        android:nextFocusRight="@id/bid_price"
         />
     <LinearLayout
         android:layout_width="0dp"
@@ -29,6 +32,10 @@
             android:layout_height="wrap_content"
             android:paddingRight="10sp"
             tools:text="1000.00"
+            android:contentDescription="@string/price"
+            android:focusable="true"
+            android:nextFocusRight="@id/change"
+            android:nextFocusLeft="@id/stock_symbol"
             />
         <TextView
             android:id="@+id/change"
@@ -39,6 +46,8 @@
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             tools:text="100%"
+            android:contentDescription="@string/change_rate"
+            android:focusable="true" android:nextFocusLeft="@id/bid_price"
             />
     </LinearLayout>
 </LinearLayout>

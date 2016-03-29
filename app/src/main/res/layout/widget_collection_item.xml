@@ -17,6 +17,9 @@
         android:layout_margin="3dp"
         android:gravity="left|center_vertical"
         tools:text="GOOG"
+        android:contentDescription="@string/stock_symbol"
+        android:focusable="true"
+        android:nextFocusRight="@id/change"
         />
 
     <TextView
@@ -30,6 +33,9 @@
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
         tools:text="100%"
+        android:contentDescription="@string/change_rate"
+        android:focusable="true"
+        android:nextFocusLeft="@id/stock_symbol"
         />
 
 </FrameLayout>
