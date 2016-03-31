@@ -54,15 +54,23 @@ import java.util.Map;
 public class StockHistoryActivity extends Activity implements OnChartValueSelectedListener{
 
     private BarChart mChart;
+    private String mSymbol;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_history);
 
+        if (getIntent().getExtras() != null) {
+            mSymbol = getIntent().getExtras().getString("symbol");
+            if(mSymbol.equals("null")){
+                Toast.makeText(getApplicationContext(),"Stock symbol is empty!",Toast.LENGTH_LONG).show();
+            }
+        } else finish();
+
         mChart = (BarChart) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
-        mChart.setDescription("Stock (GOOG) historical data in year 2015");
+        mChart.setDescription("Stock ("+mSymbol+") historical data in year 2015");
 
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
@@ -149,6 +157,7 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
         Intent intent = new Intent(getApplicationContext(),StockMonthlyHistoryActivity.class);
         intent.putExtra("month",String.valueOf(String.format("%02d",e.getXIndex()+1)));
         intent.putExtra("year",String.valueOf(2015));
+        intent.putExtra("symbol",mSymbol);
         startActivity(intent);
     }
 
@@ -166,7 +175,7 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
          public ChartData populate(String year){
              // Web service data
              OkHttpClient client = new OkHttpClient();
-             String urlStr = "select * from yahoo.finance.historicaldata where symbol = \"YHOO\" and startDate = \""+(year)+"-01-01\" and endDate = \""+String.valueOf(year)+"-12-31\"";
+             String urlStr = "select * from yahoo.finance.historicaldata where symbol = \""+mSymbol+"\" and startDate = \""+(year)+"-01-01\" and endDate = \""+String.valueOf(year)+"-12-31\"";
              StringBuilder urlStringBuilder = new StringBuilder();
              try{
                  urlStringBuilder.append("https://query.yahooapis.com/v1/public/yql?q=");

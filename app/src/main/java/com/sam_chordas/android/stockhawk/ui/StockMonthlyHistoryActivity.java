@@ -42,6 +42,7 @@ import java.util.GregorianCalendar;
 public class StockMonthlyHistoryActivity extends Activity implements OnChartValueSelectedListener {
 
     private BarChart mChart;
+    private String mSymbol;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class StockMonthlyHistoryActivity extends Activity implements OnChartValu
         if (getIntent().getExtras() != null) {
             month = getIntent().getExtras().getString("month");
             year = getIntent().getExtras().getString("year");
+            mSymbol = getIntent().getExtras().getString("symbol");
 
         } else finish();
 
@@ -198,7 +200,7 @@ public class StockMonthlyHistoryActivity extends Activity implements OnChartValu
             lowPriceArray = new float[daysCount];
             highPriceArray = new float[daysCount];
 
-            String urlStr = "select * from yahoo.finance.historicaldata where symbol = \"YHOO\" and startDate = \"" +
+            String urlStr = "select * from yahoo.finance.historicaldata where symbol = \""+mSymbol+"\" and startDate = \"" +
                     firstDateInMonth + "\" and endDate = \"" + lastDateInMonth + "\"";
             StringBuilder urlStringBuilder = new StringBuilder();
             try {
