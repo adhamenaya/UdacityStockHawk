@@ -86,6 +86,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
               @Override public void onItemClick(View v, int position) {
                 //TODO:
                 // do something on item click
+                startActivity(new Intent(getApplicationContext(), StockHistoryActivity.class).putExtra("ItemId",1));
               }
             }));
     recyclerView.setAdapter(mCursorAdapter);
@@ -164,6 +165,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 
   public void networkToast(){
     Toast.makeText(mContext, getString(R.string.network_toast), Toast.LENGTH_SHORT).show();
+  
   }
 
   public void restoreActionBar() {

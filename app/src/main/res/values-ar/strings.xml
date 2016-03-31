@@ -1,0 +1,19 @@
+<resources>
+  <string name="app_name">ستوك هوك</string>
+
+  <string name="action_example"></string>
+
+  <string name="action_settings">الإعدادات</string>
+  <string name="action_change_units">تغيير العملة</string>
+  <string name="symbol_search">البحث عن سهم</string>
+  <string name="content_test">البحث عن رمز السهم</string>
+  <string name="input_hint">FB</string>
+  <string name="input_prefill"></string>
+  <string name="widget_title">سوق اليوم</string>
+  <string name="network_toast">التطبيق بحاجة إلى إتصال بالإنترنت</string>
+  <string name="add_new_stock">أضف سهماً جديداً</string>
+  <string name="stock_list">قائمة الأسهم</string>
+  <string name="stock_symbol">رمز السهم</string>
+  <string name="price">السعر</string>
+  <string name="change_rate">نسبة التغيير</string>
+</resources>

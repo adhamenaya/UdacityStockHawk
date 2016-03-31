@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.service;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.OperationApplicationException;
@@ -7,6 +8,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
@@ -19,6 +22,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by sam_chordas on 9/30/15.
@@ -39,6 +43,10 @@ public class StockTaskService extends GcmTaskService{
     mContext = context;
   }
   String fetchData(String url) throws IOException{
+
+    Log.d("fetchData",url);
+
+
     Request request = new Request.Builder()
         .url(url)
         .build();
@@ -107,6 +115,7 @@ public class StockTaskService extends GcmTaskService{
     String urlString;
     String getResponse;
     int result = GcmNetworkManager.RESULT_FAILURE;
+    ArrayList<ContentProviderOperation> operations ;
 
     if (urlStringBuilder != null){
       urlString = urlStringBuilder.toString();
@@ -121,8 +130,12 @@ public class StockTaskService extends GcmTaskService{
             mContext.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
                 null, null);
           }
-          mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
-              Utils.quoteJsonToContentVals(getResponse));
+          operations = Utils.quoteJsonToContentVals(getResponse);
+          Log.d("sizeee",operations.size()+"");
+
+          if(operations!=null && Utils.quoteJsonToContentVals(getResponse).size()>0)
+            mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, operations);
+
         }catch (RemoteException | OperationApplicationException e){
           Log.e(LOG_TAG, "Error applying batch insert", e);
         }

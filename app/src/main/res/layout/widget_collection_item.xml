@@ -32,6 +32,8 @@
         android:background="@drawable/percent_change_pill"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         tools:text="100%"
         android:contentDescription="@string/change_rate"
         android:focusable="true"
