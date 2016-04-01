@@ -8,26 +8,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sam_chordas.android.stockhawk.ui.StockHistoryActivity">
-<android.support.v7.widget.AppCompatSpinner
-    android:id="@+id/spinner_year"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-</android.support.v7.widget.AppCompatSpinner>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart1"
-        android:layout_below="@+id/spinner_year"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     ></com.github.mikephil.charting.charts.BarChart>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/display_chart"
-        android:id="@+id/button_display_chart"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/spinner_year"
-       />
 </RelativeLayout>

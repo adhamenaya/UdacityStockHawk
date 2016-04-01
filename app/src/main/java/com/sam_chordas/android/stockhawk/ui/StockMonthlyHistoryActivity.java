@@ -47,7 +47,7 @@ public class StockMonthlyHistoryActivity extends Activity implements OnChartValu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_history);
+        setContentView(R.layout.activity_stock_monthly_history);
         String month = "";
         String year = "";
         if (getIntent().getExtras() != null) {

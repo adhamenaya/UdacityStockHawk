@@ -9,7 +9,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +52,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +60,8 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
 
     private BarChart mChart;
     private String mSymbol;
+    private Spinner mSpinnerYear;
+    private Button mDisplayChart;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,7 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
             }
         } else finish();
 
+        mDisplayChart = (Button) findViewById(R.id.button_display_chart);
         mChart = (BarChart) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
         mChart.setDescription("Stock ("+mSymbol+") historical data in year 2015");
@@ -88,6 +96,22 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
 
         mChart.getAxisRight().setEnabled(false);
 
+        // Fill the list of years
+        fillYearList();
+
+        //Display chart async
+        displayChart();
+
+        mDisplayChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayChart();
+            }
+        });
+
+    }
+
+    private void displayChart(){
         new AsyncTask<String,Void,ChartData>(){
             ChartData chartData = new ChartData();
             @Override
@@ -100,11 +124,21 @@ public class StockHistoryActivity extends Activity implements OnChartValueSelect
                 super.onPostExecute(chartData);
                 if(null!=chartData) setData(chartData);
             }
-        }.execute("2015");
+        }.execute((String)mSpinnerYear.getSelectedItem());
+    }
+
+    private void fillYearList(){
+        mSpinnerYear = (Spinner) findViewById(R.id.spinner_year);
+        ArrayList<String> years = new ArrayList<String>();
+        for(int i=2000;i<2030;i++){
+            years.add(String.valueOf(i));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,years);
+        mSpinnerYear.setAdapter(adapter);
+        mSpinnerYear.setSelection(years.indexOf(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))));
     }
 
     private void setData(ChartData chartData){
-
 
         // Create the values for X axis
         ArrayList<String> xValues = new ArrayList<String>();

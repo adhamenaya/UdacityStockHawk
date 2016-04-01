@@ -16,4 +16,5 @@
     <string name="stock_symbol">Stock symbol</string>
     <string name="price">Price</string>
     <string name="change_rate">Change rate</string>
+    <string name="display_chart">Display chart</string>
 </resources>
