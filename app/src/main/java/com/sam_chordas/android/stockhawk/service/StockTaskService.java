@@ -44,9 +44,6 @@ public class StockTaskService extends GcmTaskService{
   }
   String fetchData(String url) throws IOException{
 
-    Log.d("fetchData",url);
-
-
     Request request = new Request.Builder()
         .url(url)
         .build();

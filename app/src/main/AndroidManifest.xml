@@ -41,10 +41,10 @@
         <provider
             android:name=".data.generated.QuoteProvider"
             android:authorities="com.sam_chordas.android.stockhawk.data.QuoteProvider"
-            android:exported="false" />
+            android:exported="false"/>
 
         <receiver
-            android:name=".widget.QuoteWidgetProvider"
+            android:name=".widget.MyWidgetProvider"
             android:label="@string/widget_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -56,11 +56,12 @@
         </receiver>
 
         <service
-            android:name=".widget.QuoteWidgetRemoteViewsService"
+            android:name=".widget.MyWidgetService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <activity android:name=".ui.StockHistoryActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".ui.StockHistoryActivity" android:screenOrientation="landscape">
+        </activity>
         <activity android:name=".ui.StockMonthlyHistoryActivity" android:screenOrientation="landscape"></activity>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
